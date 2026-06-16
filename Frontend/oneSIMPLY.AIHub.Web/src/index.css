@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #00a2e8;
+  --color-brand-blue-dark: #0284c7;
+  --color-brand-orange: #ff6600;
+  --color-brand-orange-dark: #ea580c;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}

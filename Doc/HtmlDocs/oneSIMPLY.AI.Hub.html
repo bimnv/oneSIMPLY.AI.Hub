@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế hoạch & Đề xuất SaaS AI Marketing - oneSIMPLY Systems</title>
+    <!-- Favicon Integration -->
+    <link rel="icon" type="image/png" href="favicon-onesimply-source.png" onerror="this.href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>'">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Đồng bộ theo tông màu Logo Thiên Long Software Solutions
+                        brandBlue: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#00a2e8', // Xanh Thiên Long chủ đạo
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            950: '#082f49',
+                        },
+                        brandOrange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#ff6600', // Cam Thiên Long chủ đạo
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            950: '#431407',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .accordion-active .accordion-content {
+            max-height: 2000px; /* Đủ lớn để hiển thị nội dung chi tiết */
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        /* Hiệu ứng sóng truyền dữ liệu */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+        .pulse-effect {
+            position: relative;
+        }
+        .pulse-effect::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 162, 232, 0.4);
+            border-radius: inherit;
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen">
+
+    <!-- Toast Notification (Thông báo copy không dùng alert) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center p-4 space-x-3 w-full max-w-xs text-gray-500 bg-white rounded-xl shadow dark:text-gray-400 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" role="alert">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-emerald-500 bg-emerald-100 rounded-lg dark:bg-emerald-900/30 dark:text-emerald-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <div id="toast-message" class="text-xs font-semibold text-slate-700 dark:text-slate-300">Đã sao chép prompt thành công!</div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Tích hợp Logo thực tế với Fallback thông minh -->
+                <div class="flex items-center">
+                    <img src="logo_onesimply.png" alt="oneSIMPLY Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+                    <!-- Fallback SVG mang đúng tông màu Thiên Long nếu không tải được ảnh -->
+                    <div id="logo-fallback" class="hidden w-10 h-10 rounded-xl bg-gradient-to-tr from-brandBlue-500 to-brandOrange-500 items-center justify-center text-white font-black text-xl shadow-md">
+                        1S
+                    </div>
+                </div>
+                <div class="border-l border-slate-200 dark:border-slate-700 pl-3">
+                    <h1 class="font-extrabold text-lg leading-tight tracking-tight text-brandBlue-500 dark:text-brandBlue-200">oneSIMPLY <span class="text-brandOrange-500">AI Hub</span></h1>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider">Hệ sinh thái thông minh</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 transition-colors" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-brandOrange-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" />
+                    </svg>
+                    <!-- Moon Icon -->
+                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-slate-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                </button>
+                
+                <!-- Quick Print Button -->
+                <button onclick="window.print()" class="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-gradient-to-r from-brandBlue-500 to-brandBlue-600 hover:from-brandBlue-600 hover:to-brandBlue-700 text-white text-sm font-semibold transition-all shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                    <span>Lưu PDF / In</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Sticky Sidebar Navigation -->
+            <aside class="lg:w-64 flex-shrink-0 lg:sticky lg:top-24 h-fit">
+                <nav class="space-y-1 bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-3">Mục lục tài liệu</p>
+                    <a href="#tong-quan" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-brandBlue-500 bg-brandBlue-50 dark:bg-brandBlue-950/40 dark:text-brandBlue-200 transition-all">
+                        1. Tổng quan cơ hội
+                    </a>
+                    <a href="#dat-ten" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        2. Đề xuất đặt tên (8 tên)
+                    </a>
+                    <a href="#kien-truc-he-thong" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        3. Kiến trúc Hệ thống B2B
+                    </a>
+                    <a href="#phan-he-tinh-nang" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        4. Các phân hệ tính năng
+                    </a>
+                    <a href="#mo-hinh-kinh-doanh" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        5. Tối ưu giá vốn & Tài chính
+                    </a>
+                    <a href="#gia-lap-tai-chinh" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        🧮 Công cụ giả lập doanh số
+                    </a>
+                    <a href="#gia-lap-khach-hang" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        👥 Giả lập khách hàng xài AI
+                    </a>
+                    <a href="#cam-nang-cursor" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        💻 Cẩm nang Solo Cursor
+                    </a>
+                    <a href="#lo-trinh-trien-khai" class="nav-link block px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+                        🚀 Lộ trình triển khai (8 tuần)
+                    </a>
+                </nav>
+                
+                <!-- Quick Contact / Note Card -->
+                <div class="mt-4 p-4 bg-gradient-to-br from-brandOrange-500 to-brandBlue-600 rounded-xl text-white shadow-md relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <img src="favicon-onesimply-source.png" alt="oneSIMPLY Icon" class="w-5 h-5 object-contain rounded" onerror="this.style.display='none'">
+                        <h4 class="font-bold text-sm">💡 Định hướng Solo Dev</h4>
+                    </div>
+                    <p class="text-xs text-brandBlue-50 leading-relaxed">Cursor là "thợ gõ", anh là "kiến trúc sư". Hãy áp dụng chặt chẽ <strong>Nguyên tắc chia nhỏ (Rule of One)</strong> để kiểm soát mã nguồn hiệu quả.</p>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 space-y-12 pb-16">
+                
+                <!-- Section 1: Tổng quan -->
+                <section id="tong-quan" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandBlue-50 dark:bg-brandBlue-950/60 rounded-xl text-brandBlue-500 dark:text-brandBlue-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </span>
+                        <h2 class="text-2xl font-bold">1. Tổng quan cơ hội SaaS AI B2B</h2>
+                    </div>
+                    <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p>
+                            Thị trường doanh nghiệp (B2B) luôn tìm kiếm các giải pháp giúp **tối ưu hóa quy trình làm việc, giảm chi phí nhân sự và gia tăng doanh số**. Việc xây dựng một nền tảng AI chuyên biệt cho Marketing và Kinh doanh bán cho các tổ chức khác mang lại biên lợi nhuận cực kỳ cao nhờ tính chất nhân bản không giới hạn của phần mềm (SaaS).
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                            <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-lg text-brandBlue-500 dark:text-brandBlue-200 mb-1">Mỳ ăn liền (No Prompting)</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Doanh nghiệp không cần học cách viết câu lệnh phức tạp. Họ chỉ cần chọn tính năng, điền từ khóa đơn giản.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-lg text-emerald-500 dark:text-emerald-400 mb-1">Lợi nhuận cao</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Phí API ngày càng rẻ (đặc biệt các dòng mini hay mã nguồn mở), trong khi giá trị giải pháp bán ra cho doanh nghiệp rất lớn.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-lg text-brandOrange-500 dark:text-brandOrange-400 mb-1">Dữ liệu độc quyền</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Tích lũy data kịch bản, hành vi và mẫu bài viết thành tài sản lớn để tự tinh chỉnh (fine-tune) model riêng sau này.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Đề xuất Đặt tên -->
+                <section id="dat-ten" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="p-3 bg-brandOrange-50 dark:bg-brandOrange-950/60 rounded-xl text-brandOrange-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </span>
+                        <div>
+                            <h2 class="text-2xl font-bold">2. Đề xuất Đặt tên Sản phẩm SaaS AI</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Thừa hưởng thương hiệu lõi **oneSIMPLY** nhằm xây dựng một hệ sinh thái đồng nhất với **oneSIMPLY ERP**</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                        Dưới đây là 8 phương án đặt tên được phân tích chi tiết. Anh có thể bấm vào từng thẻ để nghiên cứu định vị thương hiệu và slogan:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Name 1 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY Marketing AI</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 1: Trực diện</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Bản AI chuyên biệt cho tiếp thị.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Tự động hóa tiếp thị, tối ưu doanh thu."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Rất dễ hiểu. Phù hợp các chủ doanh nghiệp truyền thống, chủ shop chưa rành công nghệ.</p>
+                        </div>
+
+                        <!-- Name 2 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY BizAI</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 1: Trực diện</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> "Biz" đại diện cho Business toàn diện.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Trợ lý AI toàn năng cho doanh nghiệp của bạn."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Gọn gàng, bao quát nhiều module (sale, phân tích, kịch bản) thay vì chỉ riêng marketing.</p>
+                        </div>
+
+                        <!-- Name 3 -->
+                        <div class="p-4 rounded-xl border-2 border-brandBlue-500 bg-brandBlue-50/30 dark:bg-brandBlue-950/10 hover:border-brandBlue-600 transition-colors relative">
+                            <span class="absolute top-2.5 right-3 bg-brandOrange-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase">Khuyên dùng</span>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-700 dark:text-brandBlue-300 text-lg">oneSIMPLY Growth AI</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Tập trung vào sự tăng trưởng (Growth).</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Đơn giản hóa tăng trưởng, nhân bản doanh số."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Mang năng lượng cực kỳ tích cực. Đánh trúng nỗi khát khao doanh số của mọi doanh nghiệp B2B.</p>
+                        </div>
+
+                        <!-- Name 4 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY Reach</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 2: Kết quả</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Tiếp cận sâu rộng đến khách hàng.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Chạm đúng khách hàng, chốt đơn dễ dàng."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Ngắn gọn, mang tính hành động cao nhưng hơi thiên về thuật ngữ chuyên ngành (reach).</p>
+                        </div>
+
+                        <!-- Name 5 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY Copilot</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 3: Công nghệ</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Trợ lý/phi công đồng hành cùng DN.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Đồng hành cùng doanh nghiệp đột phá doanh thu."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Hiện đại, sang xịn. Theo chuẩn định nghĩa trợ lý AI thông minh trên toàn cầu hiện tại.</p>
+                        </div>
+
+                        <!-- Name 6 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY Agent</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 3: Công nghệ</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Đặc vụ tự vận hành độc lập.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Đặc vụ AI - Tự động hóa tiếp thị thế hệ mới."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Đón đầu làn sóng AI Agent năm 2026. Phù hợp nếu app chạy tự động đa nhiệm thông minh.</p>
+                        </div>
+
+                        <!-- Name 7 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY RevAI</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 4: Dòng tiền</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> "Rev" nghĩa là Revenue (Doanh thu).</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Đột phá doanh thu, tối ưu dòng tiền."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Cực kỳ thực tế, thu hút mạnh CFO và CEO vì đánh thẳng vào tiền về túi.</p>
+                        </div>
+
+                        <!-- Name 8 -->
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 hover:border-brandBlue-500 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-brandBlue-500 dark:text-brandBlue-200 text-lg">oneSIMPLY AutoAI</span>
+                                <span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded font-mono">Nhóm 4: Tự động hóa</span>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><strong>Giải nghĩa:</strong> Kết hợp Automation + AI.</p>
+                            <div class="text-sm italic font-medium text-slate-700 dark:text-slate-300 mb-2">"Slogan: Tự động hóa Marketing, thảnh thơi tăng trưởng."</div>
+                            <p class="text-xs text-slate-600 dark:text-slate-400"><strong>Đánh giá:</strong> Đánh trúng nhu cầu của các đơn vị bận rộn muốn rảnh tay (auto đăng bài, auto viết email).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Kiến trúc Hệ thống B2B -->
+                <section id="kien-truc-he-thong" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandBlue-50 dark:bg-brandBlue-950/60 rounded-xl text-brandBlue-500 dark:text-brandBlue-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        </span>
+                        <h2 class="text-2xl font-bold">3. Sơ đồ & Mô hình Kiến trúc Kỹ thuật 3 Lớp</h2>
+                    </div>
+                    
+                    <p class="text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
+                        Để bảo mật khóa API của anh, đồng thời tối ưu tốc độ và dễ dàng nâng cấp mô hình AI bên dưới mà không làm ảnh hưởng đến ứng dụng của người dùng, anh bắt buộc phải xây dựng mô hình qua **API Gateway trung gian** thay vì gọi trực tiếp từ app.
+                    </p>
+
+                    <!-- Sơ đồ mới: Nền sáng siêu nét, tối ưu trải nghiệm tương phản trên di động & PC -->
+                    <div class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-2xl p-6 mb-8 overflow-x-auto border border-slate-200 dark:border-slate-800 shadow-inner">
+                        <div class="min-w-[700px] text-center">
+                            <h4 class="text-xs font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase mb-8">MÔ HÌNH VẬN HÀNH LUỒNG API THỰC TẾ</h4>
+                            
+                            <div class="flex items-center justify-between px-4">
+                                <!-- Layer 1: Client App (Nền sáng) -->
+                                <div class="w-40 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="text-[10px] font-extrabold text-brandBlue-500 tracking-widest uppercase mb-1">Lớp 1: Client</div>
+                                    <div class="text-xs font-bold text-slate-700 dark:text-slate-200">Web / Mobile App</div>
+                                    <div class="mt-2 text-[10px] bg-slate-100 dark:bg-slate-700 py-1 rounded-lg text-slate-600 dark:text-slate-300 font-medium">Giao diện người dùng</div>
+                                </div>
+
+                                <!-- Arrow 1 -->
+                                <div class="flex-1 flex flex-col items-center justify-center mx-2">
+                                    <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold mb-1">Gửi Request (JSON)</span>
+                                    <div class="flex items-center w-full">
+                                        <div class="h-[2px] bg-emerald-500 flex-1"></div>
+                                        <svg class="w-3 h-3 text-emerald-500 -ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <span class="text-[9px] text-slate-400 dark:text-slate-500 mt-1 font-medium">Ẩn hoàn toàn API Key</span>
+                                </div>
+
+                                <!-- Layer 2: API Gateway -->
+                                <div class="w-56 bg-white dark:bg-slate-800 border-2 border-brandBlue-500 rounded-2xl p-5 shadow-lg relative transform hover:scale-[1.02] transition-all">
+                                    <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-brandBlue-500 to-brandOrange-500 text-white text-[9px] px-3 py-1 rounded-full font-extrabold uppercase tracking-widest shadow-sm">
+                                        Core của anh
+                                    </div>
+                                    <div class="text-[10px] font-extrabold text-brandOrange-500 tracking-widest uppercase mb-1">Lớp 2: Gateway</div>
+                                    <div class="text-xs font-bold text-slate-800 dark:text-slate-100">ASP.NET Core Web API</div>
+                                    <div class="mt-3 text-[9px] text-left text-slate-600 dark:text-slate-300 space-y-1.5 font-medium border-t border-slate-100 dark:border-slate-700 pt-3">
+                                        <div class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brandBlue-500 mr-2"></span>🛡️ Bảo mật & Giấu API Key</div>
+                                        <div class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brandBlue-500 mr-2"></span>💰 Quản lý gói cước & ví tiền</div>
+                                        <div class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brandOrange-500 mr-2"></span>🔄 Định tuyến Hybrid thông minh</div>
+                                    </div>
+                                </div>
+
+                                <!-- Arrow 2 -->
+                                <div class="flex-1 flex flex-col items-center justify-center mx-2">
+                                    <span class="text-[10px] text-brandBlue-600 dark:text-brandBlue-400 font-bold mb-1">Đính kèm Auth Key</span>
+                                    <div class="flex items-center w-full">
+                                        <div class="h-[2px] bg-brandBlue-500 flex-1"></div>
+                                        <svg class="w-3 h-3 text-brandBlue-500 -ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <span class="text-[9px] text-slate-400 dark:text-slate-500 mt-1 font-medium">Bảo mật tuyệt đối</span>
+                                </div>
+
+                                <!-- Layer 3: AI Cores -->
+                                <div class="w-44 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm space-y-2">
+                                    <div class="text-[10px] font-extrabold text-slate-400 tracking-widest uppercase mb-1">Lớp 3: AI Cores</div>
+                                    <div class="text-[10px] bg-brandOrange-50 dark:bg-brandOrange-950/20 text-brandOrange-600 dark:text-brandOrange-400 py-1.5 px-2 rounded-lg font-bold border border-brandOrange-100 dark:border-brandOrange-900/30">
+                                        GPT-4o / Claude 3.5
+                                    </div>
+                                    <div class="text-[10px] bg-brandBlue-50 dark:bg-brandBlue-950/20 text-brandBlue-600 dark:text-brandBlue-400 py-1.5 px-2 rounded-lg font-bold border border-brandBlue-100 dark:border-brandBlue-900/30">
+                                        DeepSeek V3 (Giá siêu rẻ)
+                                    </div>
+                                    <div class="text-[10px] bg-slate-100 dark:bg-slate-700 py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-300 font-bold border border-slate-200 dark:border-slate-600">
+                                        Stable Diffusion / Imagen
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Các phân hệ tính năng -->
+                <section id="phan-he-tinh-nang" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-emerald-100 dark:bg-emerald-950/60 rounded-xl text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"/></svg>
+                        </span>
+                        <h2 class="text-2xl font-bold">4. Bộ tính năng "Mỳ ăn liền" đóng gói cho Doanh nghiệp</h2>
+                    </div>
+
+                    <!-- Feature Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="p-5 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-brandBlue-100 dark:bg-brandBlue-950/50 flex items-center justify-center text-brandBlue-500 dark:text-brandBlue-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg">Phân hệ Copywriting</h3>
+                            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc pl-4">
+                                <li><strong>Bài viết chuẩn tâm lý AIDA/PAS:</strong> Điền thông tin -> Tự sinh bài quảng cáo.</li>
+                                <li><strong>Kịch bản Video ngắn:</strong> Kịch bản 2 cột (Lời thoại / Khung hình).</li>
+                                <li><strong>Lên lịch Fanpage cả tuần:</strong> Chuỗi 10 bài đăng định dạng chuẩn Facebook.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="p-5 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-brandOrange-100 dark:bg-brandOrange-950/50 flex items-center justify-center text-brandOrange-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg">Phân hệ Business Analyst</h3>
+                            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc pl-4">
+                                <li><strong>Nghiên cứu Chân dung (Persona):</strong> Phân tích mong muốn và rào cản khách hàng.</li>
+                                <li><strong>Tìm điểm khác biệt USP:</strong> Phân tích ưu thế cạnh tranh so với đối thủ.</li>
+                                <li><strong>Tư vấn ngách thị trường:</strong> Đánh giá tiềm năng và rủi ro của ngách.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="p-5 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700 space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg">Chăm sóc & Bán hàng</h3>
+                            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc pl-4">
+                                <li><strong>Kịch bản Telesale / Chatbot:</strong> Hội thoại mẫu xử lý từ chối hiệu quả.</li>
+                                <li><strong>Email Marketing chuỗi:</strong> Kịch bản tự động gửi (Chào mừng, Báo giá, Re-marketing).</li>
+                                <li><strong>Phân tích Phản hồi khách:</strong> Quét bình luận và gợi ý cách ứng phó.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Mô hình kinh doanh & Tối ưu chi phí -->
+                <section id="mo-hinh-kinh-doanh" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandOrange-50 dark:bg-brandOrange-950/60 rounded-xl text-brandOrange-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <h2 class="text-2xl font-bold">5. Chiến lược Tối ưu Giá vốn & Thiết lập Giá bán</h2>
+                    </div>
+
+                    <div class="space-y-6 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800 dark:text-slate-100 mb-2">🛡️ Cơ chế Định tuyến thông minh (Hybrid Routing)</h3>
+                            <p>Đây là giải pháp cứu cánh giúp anh **giảm đến 70% chi phí hóa đơn API** từ các nhà cung cấp như OpenAI, Claude. Nguyên tắc hoạt động rất đơn giản:</p>
+                            <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-770 rounded-xl border border-slate-150 dark:border-slate-700 flex flex-col md:flex-row gap-4">
+                                <div class="flex-1">
+                                    <div class="text-xs font-bold text-emerald-500 uppercase tracking-wide mb-1">Tác vụ Đơn giản (90% nhu cầu)</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Ví dụ: Viết bài đăng MXH, dịch thuật, định dạng lại văn bản...</div>
+                                    <div class="text-xs px-2.5 py-1 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 w-fit rounded-md font-semibold">Tự động định tuyến gọi: GPT-4o-mini hoặc DeepSeek</div>
+                                </div>
+                                <div class="flex-1 border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-700 pt-4 md:pt-0 md:pl-4">
+                                    <div class="text-xs font-bold text-brandBlue-500 uppercase tracking-wide mb-1">Tác vụ Phức tạp (10% nhu cầu)</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Ví dụ: Phân tích chiến lược USP, phân tích dữ liệu kinh doanh phức tạp...</div>
+                                    <div class="text-xs px-2.5 py-1 bg-brandBlue-100 dark:bg-brandBlue-950/40 text-brandBlue-700 dark:text-brandBlue-400 w-fit rounded-md font-semibold">Tự động định tuyến gọi: Claude 3.5 Sonnet hoặc GPT-4o</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800 dark:text-slate-100 mb-2">📦 Đóng gói Gói dịch vụ cho khách hàng</h3>
+                            <p class="mb-3">Khuyên nghị anh nên áp dụng mô hình thu phí thuê bao tháng (Subscription) kết hợp hạn mức để khách hàng có thói quen trả tiền đều đặn:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/50 dark:bg-slate-900/10">
+                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Gói Starter</h4>
+                                    <p class="text-xs text-slate-400 dark:text-slate-500 mb-2">Phù hợp cá nhân, shop nhỏ</p>
+                                    <div class="text-lg font-bold text-brandBlue-500 mb-2">390.000đ <span class="text-xs text-slate-500 font-normal">/tháng</span></div>
+                                    <ul class="text-[11px] space-y-1 text-slate-500 dark:text-slate-400">
+                                        <li>• Viết 50 bài viết chất lượng cao</li>
+                                        <li>• Hỗ trợ định tuyến Model rẻ</li>
+                                        <li>• Hỗ trợ 1 tài khoản đăng nhập</li>
+                                    </ul>
+                                </div>
+                                <div class="p-4 border-2 border-brandBlue-500 rounded-xl relative bg-white dark:bg-slate-800">
+                                    <span class="absolute -top-2.5 right-4 bg-brandOrange-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase">Bán chạy nhất</span>
+                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Gói Professional</h4>
+                                    <p class="text-xs text-slate-400 dark:text-slate-500 mb-2">Phù hợp doanh nghiệp SME</p>
+                                    <div class="text-lg font-bold text-brandBlue-500 mb-2">990.000đ <span class="text-xs text-slate-500 font-normal">/tháng</span></div>
+                                    <ul class="text-[11px] space-y-1 text-slate-500 dark:text-slate-400">
+                                        <li>• Viết 200 bài viết + Kịch bản video</li>
+                                        <li>• Hỗ trợ AI phân tích chiến lược (Model cao cấp)</li>
+                                        <li>• Hỗ trợ tối đa 3 tài khoản nhân sự</li>
+                                    </ul>
+                                </div>
+                                <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/50 dark:bg-slate-900/10">
+                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Gói Agency / Doanh nghiệp</h4>
+                                    <p class="text-xs text-slate-400 dark:text-slate-500 mb-2">Cho đơn vị chạy quy mô lớn</p>
+                                    <div class="text-lg font-bold text-brandBlue-500 mb-2">2.490.000đ <span class="text-xs text-slate-500 font-normal">/tháng</span></div>
+                                    <ul class="text-[11px] space-y-1 text-slate-500 dark:text-slate-400">
+                                        <li>• Hạn mức sử dụng không giới hạn (On-demand)</li>
+                                        <li>• Đầy đủ phân hệ tư vấn, CSKH cao cấp</li>
+                                        <li>• Đội ngũ support cấu hình riêng biệt</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive Pricing Calculator -->
+                <section id="gia-lap-tai-chinh" class="scroll-mt-24 bg-gradient-to-tr from-brandBlue-950 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl border border-brandBlue-500/20">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandBlue-500/30 rounded-xl text-brandBlue-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 11h.01M12 7h.01M9 11h.01M12 14h.01M15 11h.01M15 7h.01M3 12a9 9 0 1118 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <div>
+                            <h2 class="text-2xl font-bold">🧮 Trình Giả lập Tài chính & Dự toán Lợi nhuận B2B</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Kéo thanh trượt để ước lượng nhanh biên độ lợi nhuận thực tế dựa trên cách định tuyến Hybrid Routing</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Inputs -->
+                        <div class="space-y-6 bg-slate-800/40 p-5 rounded-xl border border-slate-750">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex justify-between">
+                                    <span>Số lượng khách hàng hoạt động:</span>
+                                    <span id="label-users" class="text-brandBlue-300 font-mono text-sm">100 khách</span>
+                                </label>
+                                <input type="range" id="input-users" min="10" max="1000" step="10" value="100" class="w-full accent-brandBlue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex justify-between">
+                                    <span>Giá gói thuê bao trung bình / tháng:</span>
+                                    <span id="label-price" class="text-brandBlue-300 font-mono text-sm">500.000 VNĐ</span>
+                                </label>
+                                <input type="range" id="input-price" min="100000" max="2500000" step="50000" value="500000" class="w-full accent-brandBlue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex justify-between">
+                                    <span>Lượt dùng AI trung bình / khách / tháng:</span>
+                                    <span id="label-requests" class="text-brandBlue-300 font-mono text-sm">150 lượt</span>
+                                </label>
+                                <input type="range" id="input-requests" min="10" max="1000" step="10" value="150" class="w-full accent-brandBlue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+                            </div>
+
+                            <div class="p-3 bg-slate-900/60 rounded-lg border border-slate-700 text-xs text-slate-400 leading-relaxed">
+                                📌 <strong>Hệ số tính toán mặc định:</strong> <br>
+                                Giả định <strong>90% tác vụ</strong> dùng model giá rẻ (DeepSeek v3 / GPT-4o-mini ~ 150đ/lượt) và <strong>10% tác vụ</strong> dùng model cao cấp (Claude 3.5 / GPT-4o ~ 1.500đ/lượt).
+                            </div>
+                        </div>
+
+                        <!-- Outputs Display -->
+                        <div class="flex flex-col justify-between bg-slate-850 p-6 rounded-xl border border-brandBlue-500/20 shadow-lg">
+                            <div class="space-y-4">
+                                <div class="pb-4 border-b border-slate-700/50">
+                                    <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">Tổng Doanh thu / Tháng</div>
+                                    <div id="output-revenue" class="text-3xl font-extrabold text-white mt-1">50.000.000 VNĐ</div>
+                                </div>
+                                <div class="pb-4 border-b border-slate-700/50 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">Tổng Chi phí API Ước tính</div>
+                                        <div id="output-api-cost" class="text-lg font-bold text-brandOrange-400 mt-1">4.275.000 VNĐ</div>
+                                    </div>
+                                    <div class="text-[10px] bg-brandOrange-500/10 text-brandOrange-300 px-2 py-1 rounded border border-brandOrange-500/20">Giá vốn API</div>
+                                </div>
+                                <div class="pt-2">
+                                    <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">Lợi nhuận gộp biên ước tính</div>
+                                    <div id="output-profit" class="text-4xl font-black text-emerald-400 mt-1">45.725.000 VNĐ</div>
+                                    <div id="output-margin" class="text-xs text-emerald-300 font-mono mt-1">Tỷ suất lợi nhuận: 91.45%</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center text-[10px] text-slate-500 dark:text-slate-450 mt-6 pt-4 border-t border-slate-700">
+                                *Số liệu dựa trên mức giá API thực tế. Chưa bao gồm chi phí vận hành máy chủ lưu trữ (rất nhỏ, khoảng $10-$20/tháng).
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW Section 6: Giả lập Chân dung & Hành vi Khách hàng -->
+                <section id="gia-lap-khach-hang" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandOrange-50 dark:bg-brandOrange-950/40 rounded-xl text-brandOrange-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </span>
+                        <div>
+                            <h2 class="text-2xl font-bold">6. Trình Giả lập Hành vi Khách hàng xài AI</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Chọn chân dung khách hàng để trực quan hóa lượng tài nguyên tiêu thụ và phân tích lợi nhuận chi tiết</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Chọn Profile và chỉnh tay -->
+                        <div class="lg:col-span-1 space-y-6">
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">1. Chọn chân dung mẫu</h3>
+                                <div class="space-y-2">
+                                    <button onclick="applyPersona('mom-shop')" id="btn-p-mom-shop" class="w-full text-left p-3 rounded-lg border-2 border-brandBlue-500 bg-brandBlue-50/20 dark:bg-brandBlue-950/20 transition-all">
+                                        <div class="font-bold text-xs text-brandBlue-600 dark:text-brandBlue-400">🤱 Mẹ bỉm sữa / Shop online nhỏ</div>
+                                        <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Nhu cầu: 30 bài viết/tháng, 100% content thông thường.</div>
+                                    </button>
+                                    <button onclick="applyPersona('sme-marketing')" id="btn-p-sme-marketing" class="w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brandBlue-500 transition-all">
+                                        <div class="font-bold text-xs text-slate-800 dark:text-slate-200">🏢 Phòng Marketing DN vừa & nhỏ</div>
+                                        <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Nhu cầu: 150 requests/tháng, 90% content, 10% chiến lược.</div>
+                                    </button>
+                                    <button onclick="applyPersona('agency')" id="btn-p-agency" class="w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brandBlue-500 transition-all">
+                                        <div class="font-bold text-xs text-slate-800 dark:text-slate-200">⚡ Agency Quảng cáo chuyên nghiệp</div>
+                                        <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Nhu cầu: 600 requests/tháng, 70% content, 30% phân tích sâu.</div>
+                                    </button>
+                                    <button onclick="applyPersona('custom')" id="btn-p-custom" class="w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brandBlue-500 transition-all">
+                                        <div class="font-bold text-xs text-slate-800 dark:text-slate-200">⚙️ Cấu hình Tự do (Custom)</div>
+                                        <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Tự kéo thanh trượt theo nhu cầu mong muốn.</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-4">
+                                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">2. Chỉnh số liệu hành vi</h3>
+                                <div>
+                                    <label class="block text-xs font-semibold mb-1.5 flex justify-between">
+                                        <span>Số bài viết/tháng của khách:</span>
+                                        <span id="lbl-custom-reqs" class="font-mono text-brandBlue-500">30 lượt</span>
+                                    </label>
+                                    <input type="range" id="rng-custom-reqs" min="10" max="1000" step="10" value="30" disabled class="w-full accent-brandBlue-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-not-allowed opacity-50">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold mb-1.5 flex justify-between">
+                                        <span>% Bài viết thường (DeepSeek):</span>
+                                        <span id="lbl-custom-ratio" class="font-mono text-brandOrange-500">100%</span>
+                                    </label>
+                                    <input type="range" id="rng-custom-ratio" min="0" max="100" step="5" value="100" disabled class="w-full accent-brandOrange-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-not-allowed opacity-50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kết quả và Mô phỏng tương tác -->
+                        <div class="lg:col-span-2 flex flex-col justify-between space-y-6">
+                            <!-- So sánh chi phí và lợi ích -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-[10px] font-bold text-rose-500 uppercase tracking-wider">Nếu chạy 100% Premium API</div>
+                                        <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">Gọi trực tiếp GPT-4o / Claude 3.5</div>
+                                        <div id="lbl-direct-cost" class="text-2xl font-black text-rose-500 mt-3">45.000 VNĐ <span class="text-xs font-normal text-slate-400">/khách</span></div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-400 dark:text-slate-500 mt-4 border-t border-slate-100 dark:border-slate-700 pt-2 font-medium">
+                                        Hệ thống cũ: Gọi trực tiếp không phân luồng, lãng phí tài nguyên lớn.
+                                    </div>
+                                </div>
+
+                                <div class="p-5 bg-gradient-to-tr from-brandBlue-50/50 to-brandOrange-50/50 dark:from-slate-900 dark:to-slate-850 border-2 border-brandBlue-500 rounded-xl flex flex-col justify-between relative overflow-hidden">
+                                    <div class="absolute -top-3 -right-6 w-20 h-20 bg-brandBlue-500/10 rounded-full blur-lg"></div>
+                                    <div>
+                                        <div class="text-[10px] font-bold text-brandBlue-500 uppercase tracking-wider flex items-center justify-between">
+                                            <span>Mô hình Hybrid của oneSIMPLY</span>
+                                            <span class="bg-emerald-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded">TỐI ƯU</span>
+                                        </div>
+                                        <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">Tự động phân phối DeepSeek & GPT</div>
+                                        <div id="lbl-hybrid-cost" class="text-2xl font-black text-brandBlue-500 mt-3">4.500 VNĐ <span class="text-xs font-normal text-slate-400">/khách</span></div>
+                                    </div>
+                                    <div id="lbl-saving-percent" class="text-xs text-brandOrange-500 font-extrabold mt-4 border-t border-slate-150 dark:border-slate-700 pt-2">
+                                        👉 Tiết kiệm đến 90.00% chi phí giá vốn!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Simulation Animation Widget -->
+                            <div class="p-6 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-lg flex-1 flex flex-col justify-between min-h-[220px]">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Bảng điều khiển Giả lập Real-time</span>
+                                    </div>
+                                    <div class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2 py-0.5 rounded" id="lbl-sim-status">Sẵn sàng</div>
+                                </div>
+
+                                <!-- Live Counters -->
+                                <div class="grid grid-cols-3 gap-4 my-4">
+                                    <div class="text-center p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+                                        <div class="text-[10px] text-slate-400 uppercase font-medium">Lượt gọi AI</div>
+                                        <div id="sim-calls" class="text-2xl font-black text-brandBlue-400 mt-1">0</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+                                        <div class="text-[10px] text-slate-400 uppercase font-medium">Ký tự sinh ra</div>
+                                        <div id="sim-chars" class="text-2xl font-black text-brandOrange-400 mt-1">0</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+                                        <div class="text-[10px] text-slate-400 uppercase font-medium">Tiền tiết kiệm</div>
+                                        <div id="sim-saved" class="text-2xl font-black text-emerald-400 mt-1">0đ</div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button onclick="startSimulation()" id="btn-sim-start" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue-500 to-brandBlue-600 hover:from-brandBlue-600 hover:to-brandBlue-700 text-xs font-extrabold text-white transition-all shadow flex items-center justify-center space-x-2">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+                                        <span>Chạy mô phỏng live 100 khách hàng</span>
+                                    </button>
+                                    <button onclick="resetSimulation()" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 transition-all border border-slate-700">
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Cẩm nang Solo Cursor -->
+                <section id="cam-nang-cursor" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="p-3 bg-brandBlue-100 dark:bg-brandBlue-950/60 rounded-xl text-brandBlue-500 dark:text-brandBlue-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        </span>
+                        <div>
+                            <h2 class="text-2xl font-bold">7. Cẩm nang Vận hành Cursor cho Solo Developer</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Làm sao để một mình tự code toàn bộ hệ thống mà không bị quá tải?</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        Với sức mạnh từ Cursor Composer và Agent, năng suất của anh có thể tăng gấp 3 lần. Dưới đây là 4 nguyên tắc "xương máu" để tối ưu hóa quá trình phát triển một mình:
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                            <h3 class="font-bold text-sm text-brandBlue-500 dark:text-brandBlue-400 flex items-center mb-1">
+                                <span class="w-2 h-2 rounded-full bg-brandBlue-500 mr-2"></span>
+                                Nguyên tắc chia nhỏ bài toán (Rule of One)
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Đừng yêu cầu Cursor làm quá nhiều việc trong một câu lệnh (Ví dụ: "Viết toàn bộ trang Admin và cấu hình API"). Hãy chia cực kỳ nhỏ: Bước 1: Tạo API login; Bước 2: Viết giao diện form; Bước 3: Đấu nối API.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                            <h3 class="font-bold text-sm text-brandOrange-500 flex items-center mb-1">
+                                <span class="w-2 h-2 rounded-full bg-brandOrange-500 mr-2"></span>
+                                Tag file cụ thể với @Files / @Folders
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Tránh để Cursor tự quét toàn bộ thư mục (gây cạn kiệt lượt dùng Fast Requests nhanh chóng). Hãy bấm phím <kbd class="px-1 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-[10px]">@</kbd> và tag đúng file cần sửa lỗi để AI tập trung viết code chuẩn chỉnh nhất.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                            <h3 class="font-bold text-sm text-emerald-600 dark:text-emerald-400 flex items-center mb-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-600 mr-2"></span>
+                                Sử dụng Model Tiết kiệm khi Code Giao diện
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Các tác vụ liên quan đến HTML/CSS/JS giao diện đơn giản không cần đến các model đắt tiền. Hãy cấu hình dùng model rẻ hoặc chế độ normal của Cursor để giữ lại lượt dùng cao cấp (Premium) cho các thuật toán logic khó ở Backend.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 dark:bg-slate-750 rounded-xl border border-slate-100 dark:border-slate-700">
+                            <h3 class="font-bold text-sm text-indigo-600 dark:text-indigo-400 flex items-center mb-1">
+                                <span class="w-2 h-2 rounded-full bg-indigo-600 mr-2"></span>
+                                Quản lý mã nguồn bằng Git (Bắt buộc)
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Cứ mỗi khi Cursor viết xong một tính năng chạy mượt mà ổn định, anh hãy commit code lên Git ngay lập tức. Nếu bước tiếp theo AI code bị lỗi hàng loạt, anh chỉ cần khôi phục lại trạng thái cũ trong 1 nốt nhạc thay vì ngồi mò sửa lỗi.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 7: Lộ trình triển khai -->
+                <section id="lo-trinh-trien-khai" class="scroll-mt-24 bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 transition-colors shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700">
+                        <div class="flex items-center space-x-3">
+                            <span class="p-3 bg-brandBlue-100 dark:bg-brandBlue-950/60 rounded-xl text-brandBlue-500 dark:text-brandBlue-200">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                            </span>
+                            <div>
+                                <h2 class="text-2xl font-bold">8. Lộ trình triển khai MVP & Prompt Board</h2>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Mở rộng chi tiết cấu trúc và sao chép trực tiếp câu lệnh điều phối Cursor.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Speed Mode Toggle Group -->
+                        <div class="flex items-center p-1 bg-slate-100 dark:bg-slate-700 rounded-xl w-fit self-start md:self-auto shadow-inner">
+                            <button onclick="setSpeedMode('standard')" id="btn-mode-standard" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue-500 text-white shadow-sm">
+                                Thong thong (2h/ngày)
+                            </button>
+                            <button onclick="setSpeedMode('sprint')" id="btn-mode-sprint" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-350 hover:text-brandOrange-500 dark:hover:text-brandOrange-400">
+                                🔥 Chiến thần (8h/ngày)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Accordion Container -->
+                    <div class="space-y-4">
+                        
+                        <!-- PHASE 1 -->
+                        <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:shadow-sm" id="week-1-2">
+                            <button onclick="toggleAccordion('week-1-2')" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-slate-100">
+                                <div class="flex items-center space-x-3">
+                                    <span id="badge-p1" data-standard="W1-2" data-sprint="N1-3" class="w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black">W1-2</span>
+                                    <div>
+                                        <h3 id="title-p1" data-standard="Tuần 1 - 2: Cơ sở dữ liệu & Cấu trúc API Core" data-sprint="Ngày 1 - 3: Thiết kế Database & API Core" class="text-sm sm:text-base">Tuần 1 - 2: Cơ sở dữ liệu & Cấu trúc API Core</h3>
+                                        <p id="sub-p1" data-standard="Xương sống hệ thống & cấu hình LLM Services" data-sprint="⚡ Tập trung 100% thiết lập Database & các LLM Services" class="text-[10px] text-brandBlue-500 dark:text-brandBlue-300 uppercase tracking-widest mt-0.5">Xương sống hệ thống & cấu hình LLM Services</p>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-5 border-t border-slate-150 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/20 text-sm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">📁 Cấu trúc thư mục Backend (ASP.NET Core API):</h4>
+                                        <pre class="bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto">
+oneSIMPLY.AIHub.Api/
+├── Controllers/           # Chứa các Controller xử lý Request (Chat, Auth, Payment)
+├── Models/                # Định nghĩa các Entity Database (User, Log, Subscription)
+├── Data/                  # DbContext và các file cấu hình EF Core Migrations
+├── Services/              # Logic gọi API bên thứ ba (OpenAIService, DeepSeekService)
+├── DTOs/                  # Data Transfer Objects cho Request và Response
+└── Program.cs             # Khởi tạo DI Container, Middleware, Auth Config</pre>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 1 (Khởi tạo DB & Models):</h4>
+                                            <button onclick="copyPrompt('prompt-w1-db')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w1-db" class="hidden">Hãy tạo cấu trúc cơ sở dữ liệu Entity Framework Core (SQL Server) cho dự án oneSIMPLY AI Hub. Tôi cần các Model sau:
+1. User (Id, Email, PasswordHash, CreatedAt, IsActive)
+2. Subscription (Id, Name, Price, MaxRequests, DurationDays)
+3. UserSubscription (Id, UserId, SubscriptionId, StartDate, EndDate, IsActive, RemainingRequests)
+4. UsageLog (Id, UserId, ModelUsed, PromptTokens, CompletionTokens, Cost, CreatedAt, TaskType)
+5. Transaction (Id, UserId, Amount, Status, Code, CreatedAt)
+
+Hãy viết code C# cho các class Entity này, class DbContext, cài đặt Fluent API quan hệ và cung cấp lệnh khởi tạo Migration.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy tạo cấu trúc cơ sở dữ liệu Entity Framework Core (SQL Server) cho dự án oneSIMPLY AI Hub. Tôi cần các Model sau: User, Subscription, UserSubscription, UsageLog, Transaction...
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 2 (Kết nối AI Service):</h4>
+                                            <button onclick="copyPrompt('prompt-w1-service')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w1-service" class="hidden">Hãy viết một Service trong ASP.NET Core có tên là `LLMService` để kết nối API.
+1. Tạo một Interface `ILLMService` với hàm `Task<string> GetCompletionAsync(string prompt, string model, double temperature)`.
+2. Viết class triển khai gọi đồng thời cả API OpenAI (GPT-4o, GPT-4o-mini) và API DeepSeek (DeepSeek-V3) thông qua HttpClient.
+3. Đọc API Key và BaseURL cấu hình từ appsettings.json.
+4. Xử lý lỗi (Exception handling) chuyên nghiệp và logs lỗi chi tiết.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết một Service trong ASP.NET Core có tên là LLMService để kết nối API. Tạo một Interface ILLMService với hàm GetCompletionAsync... hỗ trợ cả OpenAI và DeepSeek...
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">✅ Checklist hoàn thành:</h4>
+                                        <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-5">
+                                            <li>Tạo dự án Web API C# chạy được, kết nối cơ sở dữ liệu thành công.</li>
+                                            <li>Test gọi API OpenAI/DeepSeek từ Controller trả về text thành công.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PHASE 2 -->
+                        <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:shadow-sm" id="week-3-4">
+                            <button onclick="toggleAccordion('week-3-4')" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-slate-100">
+                                <div class="flex items-center space-x-3">
+                                    <span id="badge-p2" data-standard="W3-4" data-sprint="N4-6" class="w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black">W3-4</span>
+                                    <div>
+                                        <h3 id="title-p2" data-standard="Tuần 3 - 4: Định tuyến API Gateway & Xác thực người dùng" data-sprint="Ngày 4 - 6: API Gateway & Định tuyến thông minh" class="text-sm sm:text-base">Tuần 3 - 4: Định tuyến API Gateway & Xác thực người dùng</h3>
+                                        <p id="sub-p2" data-standard="Xác thực JWT bảo mật & Định tuyến tối ưu chi phí" data-sprint="⚡ Triển khai JWT Auth & Thuật toán Hybrid Routing" class="text-[10px] text-brandBlue-500 dark:text-brandBlue-300 uppercase tracking-widest mt-0.5">Xác thực JWT bảo mật & Định tuyến tối ưu chi phí</p>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-5 border-t border-slate-150 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/20 text-sm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 1 (JWT Authentication):</h4>
+                                            <button onclick="copyPrompt('prompt-w3-jwt')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w3-jwt" class="hidden">Hãy cài đặt xác thực JWT Token trong dự án Web API ASP.NET Core:
+1. Viết API Đăng nhập (`/api/auth/login`) nhận Email, Password. Nếu khớp, cấp JWT Token chứa claims: UserId, Email, Roles.
+2. Viết API Đăng ký (`/api/auth/register`) mã hóa mật khẩu sử dụng BCrypt trước khi lưu vào DB.
+3. Cấu hình middleware `Authentication` và `Authorization` trong `Program.cs` để bảo vệ các API bằng thuộc tính `[Authorize]`.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy cài đặt xác thực JWT Token trong dự án Web API ASP.NET Core: Viết API Đăng nhập, Đăng ký (mã hóa BCrypt)... Cấu hình Middleware trong Program.cs...
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 2 (Hybrid Routing - Định tuyến thông minh):</h4>
+                                            <button onclick="copyPrompt('prompt-w3-routing')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w3-routing" class="hidden">Hãy xây dựng một Controller tên `AIController` với Endpoint `POST /api/ai/generate` có bảo vệ JWT `[Authorize]`.
+Endpoint nhận vào: `TaskType` (string - ví dụ: "ContentGeneration", "MarketAnalysis"), `Prompt` (string).
+
+Logic xử lý tại Backend:
+1. Đọc UserId từ JWT Token Claims.
+2. Kiểm tra xem user có gói cước còn hạn mức không (`UserSubscription`). Nếu hết hoặc không có, trả về lỗi 403 "Hạn mức đã hết, vui lòng nạp thêm tiền".
+3. Thực hiện Định tuyến thông minh (Hybrid Routing):
+   - Nếu `TaskType` là "ContentGeneration" -> Gọi `DeepSeekService` chạy model giá rẻ.
+   - Nếu `TaskType` là "MarketAnalysis" -> Gọi `OpenAIService` chạy model cao cấp GPT-4o.
+4. Nhận kết quả từ AI, trừ 1 lượt dùng trong `UserSubscription`, lưu nhật ký vào bảng `UsageLog` và trả dữ liệu về cho client.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy xây dựng một Controller tên AIController với Endpoint POST /api/ai/generate... Kiểm tra UserSubscription, thực hiện Hybrid Routing: Content -> DeepSeek, Analysis -> GPT-4o...
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">✅ Checklist hoàn thành:</h4>
+                                        <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-5">
+                                            <li>Lấy được JWT Token khi gọi API Login và dùng token đó để gọi API AI thành công.</li>
+                                            <li>Khi hạ lượt dùng về 0 trong DB, hệ thống tự động chặn không cho người dùng gọi AI tiếp.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PHASE 3 -->
+                        <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:shadow-sm" id="week-5-6">
+                            <button onclick="toggleAccordion('week-5-6')" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-slate-100">
+                                <div class="flex items-center space-x-3">
+                                    <span id="badge-p3" data-standard="W5-6" data-sprint="N7-10" class="w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black">W5-6</span>
+                                    <div>
+                                        <h3 id="title-p3" data-standard="Tuần 5 - 6: Phát triển Giao diện (Frontend) Web App" data-sprint="Ngày 7 - 10: Hoàn thiện Giao diện & Đấu nối Stream" class="text-sm sm:text-base">Tuần 5 - 6: Phát triển Giao diện (Frontend) Web App</h3>
+                                        <p id="sub-p3" data-standard="Giao diện \"Mỳ ăn liền\", Form điền thông tin & Text Streaming" data-sprint="⚡ Dựng UI/UX React Tailwind & Kết nối SSE Streaming" class="text-[10px] text-brandBlue-500 dark:text-brandBlue-300 uppercase tracking-widest mt-0.5">Giao diện "Mỳ ăn liền", Form điền thông tin & Text Streaming</p>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-5 border-t border-slate-150 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/20 text-sm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">📁 Cấu trúc thư mục Frontend (React Vite + Tailwind):</h4>
+                                        <pre class="bg-slate-900 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto">
+oneSIMPLY.AIHub.Web/
+├── src/
+│   ├── assets/            # Lưu trữ logo_onesimply, hình ảnh tĩnh
+│   ├── components/        # Các UI component dùng chung (Sidebar, Navbar, Layout, Button)
+│   ├── pages/             # Các trang chính (Dashboard, CopywritingForm, Analytics, Billing)
+│   ├── services/          # Thư viện gọi API (apiClient.js sử dụng Axios, authService.js)
+│   ├── App.jsx            # Điều phối Router và cấu trúc trang chính
+│   └── main.jsx           # Điểm khởi tạo dự án React</pre>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 1 (Xây dựng form viết content mỳ ăn liền):</h4>
+                                            <button onclick="copyPrompt('prompt-w5-form')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w5-form" class="hidden">Hãy viết một trang React Component bằng Tailwind CSS có tên là `CopywritingTool.jsx` cho dự án oneSIMPLY AI Hub.
+Yêu cầu giao diện:
+1. Layout chia làm 2 cột: Cột trái chứa Form điền thông tin, cột phải hiển thị kết quả AI trả về.
+2. Form cột trái gồm:
+   - Input: Tên sản phẩm/dịch vụ.
+   - Textarea: Các ưu điểm chính (mỗi dòng một ý).
+   - Select: Giọng điệu (Ví dụ: Thuyết phục, Hài hước, Chuyên nghiệp).
+   - Select: Khung sườn bài viết (Ví dụ: Công thức AIDA, Công thức PAS).
+   - Nút "Tạo bài viết bán hàng" màu cam Thiên Long (#ff6600).
+3. Cột bên phải: Hiển thị một khung chứa kết quả đầu ra với thiết kế đẹp, có nút "Sao chép bài viết" nhanh.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết một trang React Component bằng Tailwind CSS có tên là CopywritingTool.jsx: Gồm form điền thông tin (Tên SP, ưu điểm, giọng điệu, công thức AIDA/PAS) bên trái và khung hiển thị kết quả bên phải...
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 2 (Đấu nối Text Streaming):</h4>
+                                            <button onclick="copyPrompt('prompt-w5-stream')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w5-stream" class="hidden">Hãy viết logic kết nối API Stream trong React bằng EventSource (Server-Sent Events) hoặc Fetch API with ReadableStream.
+Khi người dùng bấm nút "Tạo bài viết bán hàng", gửi request POST kèm Body JSON chứa thông tin form đến `/api/ai/generate-stream`.
+Nhận luồng text chạy về liên tục và cập nhật trực tiếp (Real-time render) vào state `resultText` trong React để tạo trải nghiệm chữ chạy mượt từng từ giống ChatGPT.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết logic kết nối API Stream trong React bằng EventSource hoặc Fetch API: Nhận luồng text chạy về liên tục và cập nhật trực tiếp vào state resultText để tạo trải nghiệm chữ chạy...
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">✅ Checklist hoàn thành:</h4>
+                                        <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-5">
+                                            <li>Giao diện hiển thị chuẩn responsive trên cả điện thoại và máy tính.</li>
+                                            <li>Bấm nút gọi API, chữ trả về xuất hiện chạy mượt mà từng chữ trên màn hình.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PHASE 4 -->
+                        <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:shadow-sm" id="week-7">
+                            <button onclick="toggleAccordion('week-7')" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-slate-100">
+                                <div class="flex items-center space-x-3">
+                                    <span id="badge-p4" data-standard="W7" data-sprint="N11-13" class="w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black">W7</span>
+                                    <div>
+                                        <h3 id="title-p4" data-standard="Tuần 7: Tự động hóa Thanh toán QR & Webhook" data-sprint="Ngày 11 - 13: Tích hợp Cổng VietQR & Webhook" class="text-sm sm:text-base">Tuần 7: Tự động hóa Thanh toán QR & Webhook</h3>
+                                        <p id="sub-p4" data-standard="Tích hợp VietQR, quét mã kích hoạt gói tự động rảnh tay" data-sprint="⚡ Thiết lập VietQR động & Hứng Webhook kích hoạt gói tự động" class="text-[10px] text-brandBlue-500 dark:text-brandBlue-300 uppercase tracking-widest mt-0.5">Tích hợp VietQR, quét mã kích hoạt gói tự động rảnh tay</p>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-5 border-t border-slate-150 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/20 text-sm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 1 (Tạo mã QR động chuyển khoản):</h4>
+                                            <button onclick="copyPrompt('prompt-w7-qr')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w7-qr" class="hidden">Hãy viết API `/api/payment/generate-qr` trong ASP.NET Core để tích hợp cổng thanh toán PayOS hoặc VietQR.
+API này nhận vào: `UserId`, `SubscriptionId`.
+Logic:
+1. Đọc thông tin gói cước từ DB để lấy Giá tiền (Amount).
+2. Tạo một mã chuyển khoản độc nhất (Ví dụ: "OSAI 1045" với 1045 là ID giao dịch).
+3. Sử dụng công thức tạo link ảnh QR của VietQR: `https://img.vietqr.io/image/{ngan_hang}-{so_tai_khoan}-compact2.png?amount={so_tien}&addInfo={noi_dung}&accountName={ten_chu_the}`.
+4. Lưu bản ghi Giao dịch ở trạng thái "Pending" và trả link ảnh QR cùng nội dung chuyển khoản về cho frontend.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết API /api/payment/generate-qr trong ASP.NET Core: Nhận UserId, SubscriptionId, tạo mã thanh toán duy nhất và liên kết VietQR động chứa số tiền, nội dung chuyển khoản...
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 2 (Xây dựng cổng Webhook hứng tiền tự động kích hoạt):</h4>
+                                            <button onclick="copyPrompt('prompt-w7-webhook')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w7-webhook" class="hidden">Hãy xây dựng một API đầu cuối Endpoint dạng Webhook `POST /api/payment/webhook` để nhận thông báo chuyển tiền từ dịch vụ ngân hàng tự động (Ví dụ: Casso, PayOS).
+Yêu cầu:
+1. Xác thực độ bảo mật của webhook (Chữ ký mã hóa SecretKey để tránh bị spam giả).
+2. Phân tích nội dung chuyển khoản để tìm Mã Giao Dịch (Ví dụ: tìm chuỗi "OSAI 1045").
+3. Nếu tìm thấy mã giao dịch khớp trạng thái "Pending" trong DB:
+   - Cập nhật trạng thái giao dịch sang "Success".
+   - Cộng số lượt sử dụng AI vào bảng `UserSubscription` tương ứng của khách hàng.
+   - Gửi thông báo realtime (SignalR) hoặc ghi nhận để thông báo lên màn hình người dùng.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy xây dựng một API đầu cuối Endpoint dạng Webhook POST /api/payment/webhook nhận tin nhắn từ ngân hàng: Phân tích mã giao dịch, tự động cộng hạn mức AI cho khách...
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">✅ Checklist hoàn thành:</h4>
+                                        <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-5">
+                                            <li>Bấm mua gói -> Hiện mã QR chuẩn kèm tiền và nội dung.</li>
+                                            <li>Chuyển khoản thật vào tài khoản test -> Hệ thống nhận diện tự động cộng lượt dùng ngay lập tức.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PHASE 5 -->
+                        <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:shadow-sm" id="week-8">
+                            <button onclick="toggleAccordion('week-8')" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 dark:text-slate-100">
+                                <div class="flex items-center space-x-3">
+                                    <span id="badge-p5" data-standard="W8" data-sprint="N14-15" class="w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black">W8</span>
+                                    <div>
+                                        <h3 id="title-p5" data-standard="Tuần 8: Bảo mật, Kiểm thử & Đóng gói Deploy VPS" data-sprint="Ngày 14 - 15: Bảo mật, Đóng gói & Deploy VPS" class="text-sm sm:text-base">Tuần 8: Bảo mật, Kiểm thử & Đóng gói Deploy VPS</h3>
+                                        <p id="sub-p5" data-standard="Docker đóng gói, Cài đặt bảo mật HTTPS & Đưa lên mạng đón khách" data-sprint="⚡ Build Docker Image, Nginx Reverse Proxy & Cấu hình SSL" class="text-[10px] text-brandBlue-500 dark:text-brandBlue-300 uppercase tracking-widest mt-0.5">Docker đóng gói, Cài đặt bảo mật HTTPS & Đưa lên mạng đón khách</p>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-5 border-t border-slate-150 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/20 text-sm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 1 (Đóng gói Docker Container):</h4>
+                                            <button onclick="copyPrompt('prompt-w8-docker')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w8-docker" class="hidden">Hãy viết cho tôi 3 tệp tin cấu hình để deploy ứng dụng sử dụng Docker:
+1. `Dockerfile` cho ASP.NET Core Web API (Sử dụng Multi-stage build để tối ưu hóa dung lượng).
+2. `Dockerfile` cho React Frontend (Sử dụng Nginx làm server chạy build tĩnh).
+3. `docker-compose.yml` để liên kết: container Backend, container Frontend và container cơ sở dữ liệu Microsoft SQL Server (hoặc PostgreSQL), cấu hình sẵn mạng nội bộ giữa các container và mount ổ đĩa lưu trữ database.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết cho tôi 3 tệp tin cấu hình deploy Docker: Dockerfile cho ASP.NET Core API, Dockerfile cho React Nginx, docker-compose.yml liên kết API, Web và SQL Server database...
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h4 class="font-bold text-brandOrange-500 text-xs uppercase tracking-wider">💬 Cursor Prompt 2 (Cấu hình Nginx Proxy & Chứng chỉ SSL Let's Encrypt):</h4>
+                                            <button onclick="copyPrompt('prompt-w8-nginx')" class="text-xs px-2.5 py-1 bg-brandBlue-500 hover:bg-brandBlue-600 text-white rounded font-semibold transition-all">Sao chép Prompt</button>
+                                        </div>
+                                        <textarea id="prompt-w8-nginx" class="hidden">Hãy viết tệp cấu hình Nginx làm Reverse Proxy chạy trên VPS Linux.
+Yêu cầu:
+1. Trỏ tên miền `onesimply-ai.vn` về container React Frontend chạy ở cổng 80.
+2. Trỏ đường dẫn `/api/` về container ASP.NET Core Backend chạy ở cổng 5000.
+3. Cấu hình hỗ trợ CORS, tăng kích thước tải tệp tin tối đa lên 50MB.
+4. Hướng dẫn tôi cách sử dụng Certbot để cài đặt chứng chỉ bảo mật HTTPS SSL miễn phí của Let's Encrypt cho tên miền.</textarea>
+                                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-750 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            Hãy viết tệp cấu hình Nginx làm Reverse Proxy chạy trên VPS Linux: Trỏ tên miền về frontend, trỏ đường dẫn /api về container API backend... hướng dẫn cài Let's Encrypt...
+                                        </div>
+                                    </div>
+
+                                    <div class="border-t border-slate-200 dark:border-slate-700 pt-3">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-300 text-xs uppercase tracking-wider mb-2">✅ Checklist hoàn thành:</h4>
+                                        <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-5">
+                                            <li>Trang web truy cập mượt mà qua giao thức bảo mật `https://`.</li>
+                                            <li>Kiểm thử bảo mật (SQL Injection, XSS) không phát hiện lỗ hổng nghiêm trọng nào.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Sticky Footer Note -->
+    <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 Bản thiết kế kiến trúc và định hướng hệ thống SaaS AI B2B - oneSIMPLY Systems.</p>
+        </div>
+    </footer>
+
+    <!-- Scripting for UI and Interactive Simulator -->
+    <script>
+        // Dark Mode Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+
+        // Check user preferences
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+            themeToggleDarkIcon.classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleLightIcon.classList.add('hidden');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleLightIcon.classList.toggle('hidden');
+            themeToggleDarkIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Interactive Financial Calculator Logic
+        const inputUsers = document.getElementById('input-users');
+        const inputPrice = document.getElementById('input-price');
+        const inputRequests = document.getElementById('input-requests');
+
+        const labelUsers = document.getElementById('label-users');
+        const labelPrice = document.getElementById('label-price');
+        const labelRequests = document.getElementById('label-requests');
+
+        const outputRevenue = document.getElementById('output-revenue');
+        const outputApiCost = document.getElementById('output-api-cost');
+        const outputProfit = document.getElementById('output-profit');
+        const outputMargin = document.getElementById('output-margin');
+
+        function formatCurrency(number) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        }
+
+        function calculateFinance() {
+            const users = parseInt(inputUsers.value);
+            const price = parseInt(inputPrice.value);
+            const requestsPerUser = parseInt(inputRequests.value);
+
+            // Update Labels
+            labelUsers.innerText = `${users.toLocaleString('vi-VN')} khách hàng`;
+            labelPrice.innerText = `${formatCurrency(price)}`;
+            labelRequests.innerText = `${requestsPerUser.toLocaleString('vi-VN')} lượt / khách`;
+
+            // Calculate Revenue
+            const revenue = users * price;
+
+            // Calculate API Cost (Hybrid Routing Assumption)
+            const totalRequests = users * requestsPerUser;
+            const cheapRequests = totalRequests * 0.9;
+            const expensiveRequests = totalRequests * 0.1;
+
+            const apiCost = (cheapRequests * 150) + (expensiveRequests * 1500);
+            
+            // Calculate Profit & Margin
+            const netProfit = revenue - apiCost;
+            const margin = (revenue > 0) ? (netProfit / revenue) * 100 : 0;
+
+            // Render output
+            outputRevenue.innerText = formatCurrency(revenue);
+            outputApiCost.innerText = formatCurrency(apiCost);
+            outputProfit.innerText = formatCurrency(netProfit);
+            outputMargin.innerText = `Tỷ suất lợi nhuận gộp biên: ${margin.toFixed(2)}%`;
+            
+            // Change colors of profit output if warning state occurs
+            if (netProfit < 0) {
+                outputProfit.className = "text-4xl font-black text-rose-500 mt-1";
+                outputMargin.className = "text-xs text-rose-300 font-mono mt-1";
+            } else {
+                outputProfit.className = "text-4xl font-black text-emerald-400 mt-1";
+                outputMargin.className = "text-xs text-emerald-300 font-mono mt-1";
+            }
+        }
+
+        // Add event listeners to input elements
+        inputUsers.addEventListener('input', calculateFinance);
+        inputPrice.addEventListener('input', calculateFinance);
+        inputRequests.addEventListener('input', calculateFinance);
+
+        // Run on load
+        calculateFinance();
+
+        // Active link highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-brandBlue-500', 'bg-brandBlue-50', 'dark:bg-brandBlue-950/40', 'dark:text-brandBlue-200');
+                link.classList.add('text-slate-600', 'dark:text-slate-300', 'hover:bg-slate-50', 'dark:hover:bg-slate-700/50');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('text-brandBlue-500', 'bg-brandBlue-50', 'dark:bg-brandBlue-950/40', 'dark:text-brandBlue-200');
+                    link.classList.remove('text-slate-600', 'dark:text-slate-300', 'hover:bg-slate-50', 'dark:hover:bg-slate-700/50');
+                }
+            });
+        });
+
+        // Interactive Accordion for Section 7 / 8
+        function toggleAccordion(id) {
+            const currentItem = document.getElementById(id);
+            const isActive = currentItem.classList.contains('accordion-active');
+            
+            // Close all first
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                item.classList.remove('accordion-active');
+                item.querySelector('svg').style.transform = 'rotate(0deg)';
+            });
+
+            // If not active, open it
+            if (!isActive) {
+                currentItem.classList.add('accordion-active');
+                currentItem.querySelector('svg').style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Open Week 1-2 by default
+        window.addEventListener('DOMContentLoaded', () => {
+            toggleAccordion('week-1-2');
+            updateCustomerCalculations();
+        });
+
+        // Copy to clipboard logic using document.execCommand (secure in iframe sandboxes)
+        function copyPrompt(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            textarea.classList.remove('hidden'); // Temporarily show to allow selection
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("Đã sao chép câu lệnh prompt thành công!");
+                } else {
+                    showToast("Có lỗi xảy ra khi sao chép!");
+                }
+            } catch (err) {
+                showToast("Trình duyệt không hỗ trợ sao chép nhanh!");
+            }
+            
+            textarea.classList.add('hidden'); // Hide again
+        }
+
+        // Show Custom Toast (No alerts)
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+            
+            // Reset position & show
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Speed Mode Switcher Logic
+        function setSpeedMode(mode) {
+            const btnStandard = document.getElementById('btn-mode-standard');
+            const btnSprint = document.getElementById('btn-mode-sprint');
+            
+            if (mode === 'sprint') {
+                btnSprint.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandOrange-500 text-white shadow-sm";
+                btnStandard.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700/50";
+                
+                // Switch badge backgrounds to orange
+                document.querySelectorAll('.accordion-item span[id^="badge-"]').forEach(el => {
+                    el.className = "w-12 h-8 rounded-full bg-brandOrange-500 text-white flex items-center justify-center text-xs font-black";
+                });
+                
+                // Switch all text content to sprint values
+                document.querySelectorAll('[data-sprint]').forEach(el => {
+                    el.innerText = el.getAttribute('data-sprint');
+                });
+                showToast("🔥 Chế độ CHIẾN THẦN kích hoạt! Lộ trình rút ngắn còn 15 ngày.");
+            } else {
+                btnStandard.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue-500 text-white shadow-sm";
+                btnSprint.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-550 dark:text-slate-355 hover:bg-slate-200 dark:hover:bg-slate-700/50";
+                
+                // Switch badge backgrounds back to blue
+                document.querySelectorAll('.accordion-item span[id^="badge-"]').forEach(el => {
+                    el.className = "w-12 h-8 rounded-full bg-brandBlue-500 text-white flex items-center justify-center text-xs font-black";
+                });
+                
+                // Switch all text content to standard values
+                document.querySelectorAll('[data-standard]').forEach(el => {
+                    el.innerText = el.getAttribute('data-standard');
+                });
+                showToast("Đã chuyển về chế độ tiêu chuẩn 8 tuần.");
+            }
+        }
+
+        /* CUSTOMER BEHAVIOR SIMULATOR LOGIC */
+        let currentPersona = 'mom-shop';
+        let simulationInterval = null;
+
+        const personas = {
+            'mom-shop': { reqs: 30, ratio: 100 },
+            'sme-marketing': { reqs: 150, ratio: 90 },
+            'agency': { reqs: 600, ratio: 70 },
+            'custom': { reqs: 100, ratio: 80 }
+        };
+
+        function applyPersona(key) {
+            currentPersona = key;
+            
+            // Highlight button
+            document.querySelectorAll('[id^="btn-p-"]').forEach(btn => {
+                btn.className = "w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brandBlue-500 transition-all bg-transparent text-slate-800 dark:text-slate-200";
+            });
+            const activeBtn = document.getElementById(`btn-p-${key}`);
+            activeBtn.className = "w-full text-left p-3 rounded-lg border-2 border-brandBlue-500 bg-brandBlue-50/20 dark:bg-brandBlue-950/20 transition-all font-bold";
+
+            const rngReqs = document.getElementById('rng-custom-reqs');
+            const rngRatio = document.getElementById('rng-custom-ratio');
+
+            if (key === 'custom') {
+                rngReqs.disabled = false;
+                rngRatio.disabled = false;
+                rngReqs.className = "w-full accent-brandBlue-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer";
+                rngRatio.className = "w-full accent-brandOrange-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer";
+            } else {
+                rngReqs.disabled = true;
+                rngRatio.disabled = true;
+                rngReqs.className = "w-full accent-brandBlue-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-not-allowed opacity-50";
+                rngRatio.className = "w-full accent-brandOrange-500 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-not-allowed opacity-50";
+                
+                // Set default values
+                rngReqs.value = personas[key].reqs;
+                rngRatio.value = personas[key].ratio;
+            }
+
+            updateCustomerCalculations();
+        }
+
+        // Bind events to sliders
+        document.getElementById('rng-custom-reqs').addEventListener('input', function() {
+            personas['custom'].reqs = parseInt(this.value);
+            updateCustomerCalculations();
+        });
+        document.getElementById('rng-custom-ratio').addEventListener('input', function() {
+            personas['custom'].ratio = parseInt(this.value);
+            updateCustomerCalculations();
+        });
+
+        function updateCustomerCalculations() {
+            const reqs = parseInt(document.getElementById('rng-custom-reqs').value);
+            const ratio = parseInt(document.getElementById('rng-custom-ratio').value); // Cheap ratio
+
+            document.getElementById('lbl-custom-reqs').innerText = `${reqs} lượt`;
+            document.getElementById('lbl-custom-ratio').innerText = `${ratio}%`;
+
+            // Costs
+            // Direct Cost assumes all premium calls (1.500đ/call)
+            const directCost = reqs * 1500;
+            // Hybrid Cost assumptions
+            const cheapReqs = reqs * (ratio / 100);
+            const premiumReqs = reqs * ((100 - ratio) / 100);
+            const hybridCost = (cheapReqs * 150) + (premiumReqs * 1500);
+
+            // Output Render
+            document.getElementById('lbl-direct-cost').innerText = `${directCost.toLocaleString('vi-VN')} đ / khách`;
+            document.getElementById('lbl-hybrid-cost').innerText = `${hybridCost.toLocaleString('vi-VN')} đ / khách`;
+
+            // Savings
+            const savings = directCost - hybridCost;
+            const savingsPercent = directCost > 0 ? (savings / directCost) * 100 : 0;
+            document.getElementById('lbl-saving-percent').innerText = `👉 Tiết kiệm đến ${savingsPercent.toFixed(2)}% chi phí giá vốn!`;
+        }
+
+        /* LIVE SIMULATION RUNNER */
+        let simActive = false;
+        let simCalls = 0;
+        let simChars = 0;
+        let simSaved = 0;
+
+        function startSimulation() {
+            if (simActive) {
+                // Pause if running
+                clearInterval(simulationInterval);
+                document.getElementById('lbl-sim-status').innerText = "Đang Tạm Dừng";
+                document.getElementById('btn-sim-start').innerHTML = `
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <span>Tiếp tục mô phỏng</span>
+                `;
+                simActive = false;
+                return;
+            }
+
+            // Start Live simulation
+            simActive = true;
+            document.getElementById('lbl-sim-status').innerText = "Đang giả lập live 100 khách...";
+            document.getElementById('btn-sim-start').innerHTML = `
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping mr-2"></span>
+                <span>Tạm dừng giả lập</span>
+            `;
+
+            const reqs = parseInt(document.getElementById('rng-custom-reqs').value);
+            const ratio = parseInt(document.getElementById('rng-custom-ratio').value);
+
+            simulationInterval = setInterval(() => {
+                // Increment counters randomly to simulate real users typing
+                const addedCalls = Math.floor(Math.random() * 5) + 1;
+                simCalls += addedCalls;
+                
+                // Assumed average of 800 characters per call response
+                simChars += addedCalls * (Math.floor(Math.random() * 600) + 400);
+
+                // Assumed cost saving per call (1.500đ - average hybrid cost)
+                const cheapRatio = ratio / 100;
+                const averageSavingsPerCall = (1500 - (cheapRatio * 150 + (1 - cheapRatio) * 1500));
+                simSaved += Math.round(addedCalls * averageSavingsPerCall * 100); // 100 active simulated users
+
+                // Update UI values
+                document.getElementById('sim-calls').innerText = simCalls.toLocaleString('vi-VN');
+                document.getElementById('sim-chars').innerText = simChars.toLocaleString('vi-VN');
+                document.getElementById('sim-saved').innerText = `${simSaved.toLocaleString('vi-VN')}đ`;
+            }, 300);
+        }
+
+        function resetSimulation() {
+            clearInterval(simulationInterval);
+            simActive = false;
+            simCalls = 0;
+            simChars = 0;
+            simSaved = 0;
+
+            document.getElementById('sim-calls').innerText = "0";
+            document.getElementById('sim-chars').innerText = "0";
+            document.getElementById('sim-saved').innerText = "0đ";
+            document.getElementById('lbl-sim-status').innerText = "Đã Reset";
+            document.getElementById('btn-sim-start').innerHTML = `
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+                <span>Chạy mô phỏng live 100 khách hàng</span>
+            `;
+        }
+    </script>
+</body>
+</html>
