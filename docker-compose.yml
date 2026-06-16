@@ -5,12 +5,10 @@ services:
       dockerfile: Backend/oneSIMPLY.AIHub.Api/Dockerfile
     ports:
       - "5000:5000"
+    env_file:
+      - .env.docker
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=oneSIMPLY_TH;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;MultipleActiveResultSets=true
-      - Jwt__Secret=oneSIMPLY_AIHub_Docker_Secret_ChangeMe_2026!
-      - Jwt__Issuer=oneSIMPLY.AIHub
-      - Jwt__Audience=oneSIMPLY.AIHub.Client
     depends_on:
       - sqlserver
 
@@ -25,9 +23,11 @@ services:
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    env_file:
+      - .env.docker
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
     ports:
       - "1433:1433"
     volumes:

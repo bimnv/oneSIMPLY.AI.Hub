@@ -7,11 +7,18 @@
 # Dependencies
 **/node_modules/
 
-# Secrets & local config
+# Secrets & local config (KHÔNG commit)
 **/.env
+**/.env.*
+!**/.env.example
+!.env.docker.example
+**/appsettings.json
 **/appsettings.Development.json
+**/appsettings.Production.json
 **/*.user
 **/*.suo
+.env.docker
+docker-compose.override.yml
 
 # Logs & uploads
 **/Logs/*.txt
